@@ -121,6 +121,7 @@ Layout:
 ```
 src/finsight_llm/   engine.py (ported engines) · guard.py (number guard, cleaner, parser) · prompts.py
                     dataset.py · templates.py · metrics.py · backends.py · evaluate.py · report.py
+                    money.py · rescore.py
 tests/              generator determinism, grounding, splits, engine arithmetic, guard behaviour
 data/               train / valid / test .jsonl, stats.json
 configs/lora.yaml   training hyperparameters
