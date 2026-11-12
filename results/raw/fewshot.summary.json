@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 95.1219512195122,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 95.1219512195122,
+  "rouge_l": 0.3729882382731525,
+  "fact_coverage": 0.8936314363143631,
+  "decode_tok_per_s": 39.25986929392631,
+  "mean_latency_s": 1.9447235782760643,
+  "p95_latency_s": 2.556516125012422,
+  "mean_output_tokens": 76.34959349593495,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 76.47058823529412,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 76.47058823529412,
+      "rouge_l": 0.33137281886898223,
+      "fact_coverage": 0.8300653594771242,
+      "decode_tok_per_s": 36.988546573715055,
+      "mean_latency_s": 1.373504132350254,
+      "p95_latency_s": 1.5961635000130627,
+      "mean_output_tokens": 50.80392156862745
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4327666084811994,
+      "fact_coverage": 0.8547008547008547,
+      "decode_tok_per_s": 38.09509167043332,
+      "mean_latency_s": 2.0365142379066525,
+      "p95_latency_s": 2.4317325839947443,
+      "mean_output_tokens": 77.58119658119658
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.3105307648791934,
+      "fact_coverage": 0.9935897435897436,
+      "decode_tok_per_s": 41.82709901283547,
+      "mean_latency_s": 2.1805272265509044,
+      "p95_latency_s": 2.6226318330154754,
+      "mean_output_tokens": 91.2051282051282
+    }
+  },
+  "peak_mem_gb": 3.56355104,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 0,
+  "meta": {
+    "name": "fewshot",
+    "variant": "fewshot",
+    "command": "python -m finsight_llm.evaluate --variant fewshot --out results/raw/fewshot.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": null,
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2-arm64-arm-64bit",
+    "started": "2026-11-12T13:32:56+0800"
+  }
+}

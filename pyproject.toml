@@ -1,0 +1,16 @@
+[project]
+name = "finsight-insight-llm"
+version = "0.1.0"
+description = "Fine-tune a small open LLM to write FinSight spending insights from structured facts, evaluate it, and export it to GGUF."
+requires-python = ">=3.10"
+dependencies = ["mlx-lm>=0.31", "gguf", "huggingface_hub"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

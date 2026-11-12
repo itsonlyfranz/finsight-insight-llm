@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.4540430581543684,
+  "fact_coverage": 0.8814363143631436,
+  "decode_tok_per_s": 30.537148667678757,
+  "mean_latency_s": 2.1682241139920455,
+  "p95_latency_s": 2.8182809169811662,
+  "mean_output_tokens": 66.21138211382114,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.5126530043857744,
+      "fact_coverage": 0.6503267973856209,
+      "decode_tok_per_s": 28.870863335876845,
+      "mean_latency_s": 1.3651051666649223,
+      "p95_latency_s": 1.8854144579963759,
+      "mean_output_tokens": 39.411764705882355
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.5166582059290965,
+      "fact_coverage": 0.9572649572649573,
+      "decode_tok_per_s": 30.795261526926648,
+      "mean_latency_s": 2.4898380423939797,
+      "p95_latency_s": 2.8310932090098504,
+      "mean_output_tokens": 76.67521367521367
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.3217984485717415,
+      "fact_coverage": 0.9188034188034188,
+      "decode_tok_per_s": 30.773830927345923,
+      "mean_latency_s": 2.2109194561799552,
+      "p95_latency_s": 2.5037542910140473,
+      "mean_output_tokens": 68.03846153846153
+    }
+  },
+  "peak_mem_gb": 3.89335084,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 73901662,
+  "meta": {
+    "name": "finetuned",
+    "variant": "finetuned",
+    "command": "python -m finsight_llm.evaluate --variant finetuned --out results/raw/finetuned.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": "artifacts/adapters",
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2-arm64-arm-64bit",
+    "started": "2026-11-12T13:40:58+0800"
+  }
+}
