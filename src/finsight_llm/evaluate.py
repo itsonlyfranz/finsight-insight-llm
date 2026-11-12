@@ -119,7 +119,7 @@ def main(argv: list[str] | None = None) -> None:
         size_bytes_adapter = dir_size(Path(args.adapter) / "adapters.safetensors")
     else:
         size_bytes_adapter = 0
-    meta = {"name": args.name or args.variant, "variant": args.variant, "command": " ".join(sys.argv),
+    meta = {"name": args.name or args.variant, "variant": args.variant, "command": " ".join(["python -m finsight_llm.evaluate", *sys.argv[1:]]),
             "model": args.model if args.variant != "gguf" else args.gguf,
             "adapter": args.adapter if args.variant == "finetuned" else None,
             "decoding": "greedy (temperature 0)", "n_test": len(rows),

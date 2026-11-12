@@ -57,7 +57,7 @@
   "meta": {
     "name": "finetuned",
     "variant": "finetuned",
-    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant finetuned --out results/raw/finetuned.jsonl",
+    "command": "python -m finsight_llm.evaluate --variant finetuned --out results/raw/finetuned.jsonl",
     "model": "models/Qwen2.5-1.5B-Instruct",
     "adapter": "artifacts/adapters",
     "decoding": "greedy (temperature 0)",

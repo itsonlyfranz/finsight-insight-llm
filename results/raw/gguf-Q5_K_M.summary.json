@@ -57,7 +57,7 @@
   "meta": {
     "name": "gguf-Q5_K_M",
     "variant": "gguf",
-    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant gguf --gguf artifacts/gguf/finsight-insight-qwen2.5-1.5b-Q5_K_M.gguf --name gguf-Q5_K_M --out results/raw/gguf-Q5_K_M.jsonl",
+    "command": "python -m finsight_llm.evaluate --variant gguf --gguf artifacts/gguf/finsight-insight-qwen2.5-1.5b-Q5_K_M.gguf --name gguf-Q5_K_M --out results/raw/gguf-Q5_K_M.jsonl",
     "model": "artifacts/gguf/finsight-insight-qwen2.5-1.5b-Q5_K_M.gguf",
     "adapter": null,
     "decoding": "greedy (temperature 0)",

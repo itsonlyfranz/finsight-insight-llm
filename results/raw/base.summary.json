@@ -57,7 +57,7 @@
   "meta": {
     "name": "base",
     "variant": "base",
-    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant base --out results/raw/base.jsonl",
+    "command": "python -m finsight_llm.evaluate --variant base --out results/raw/base.jsonl",
     "model": "models/Qwen2.5-1.5B-Instruct",
     "adapter": null,
     "decoding": "greedy (temperature 0)",

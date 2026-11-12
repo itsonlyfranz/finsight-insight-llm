@@ -57,7 +57,7 @@
   "meta": {
     "name": "fewshot",
     "variant": "fewshot",
-    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant fewshot --out results/raw/fewshot.jsonl",
+    "command": "python -m finsight_llm.evaluate --variant fewshot --out results/raw/fewshot.jsonl",
     "model": "models/Qwen2.5-1.5B-Instruct",
     "adapter": null,
     "decoding": "greedy (temperature 0)",
