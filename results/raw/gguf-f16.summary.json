@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.42511176250980437,
+  "fact_coverage": 0.9200542005420054,
+  "decode_tok_per_s": 47.07983944514578,
+  "mean_latency_s": 1.4484994586839197,
+  "p95_latency_s": 1.8474967920046765,
+  "mean_output_tokens": 68.1951219512195,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4806498969005361,
+      "fact_coverage": 0.8071895424836601,
+      "decode_tok_per_s": 46.6500704344456,
+      "mean_latency_s": 0.9721944844692617,
+      "p95_latency_s": 1.2866110829927493,
+      "mean_output_tokens": 45.35294117647059
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.49407210334026347,
+      "fact_coverage": 0.9572649572649573,
+      "decode_tok_per_s": 46.971586700691425,
+      "mean_latency_s": 1.6454755676682427,
+      "p95_latency_s": 1.8942450000031386,
+      "mean_output_tokens": 77.2905982905983
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.28535785570094496,
+      "fact_coverage": 0.938034188034188,
+      "decode_tok_per_s": 47.448834321834624,
+      "mean_latency_s": 1.464465470655481,
+      "p95_latency_s": 1.6677729999937583,
+      "mean_output_tokens": 69.48717948717949
+    }
+  },
+  "peak_mem_gb": null,
+  "model_size_bytes": 3093669152,
+  "adapter_size_bytes": 0,
+  "meta": {
+    "name": "gguf-f16",
+    "variant": "gguf",
+    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant gguf --gguf artifacts/gguf/finsight-insight-qwen2.5-1.5b-f16.gguf --name gguf-f16 --out results/raw/gguf-f16.jsonl",
+    "model": "artifacts/gguf/finsight-insight-qwen2.5-1.5b-f16.gguf",
+    "adapter": null,
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2-arm64-arm-64bit",
+    "started": "2026-11-12T13:49:55+0800"
+  }
+}

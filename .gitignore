@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+# large artifacts: weights, adapters, GGUF, raw model downloads
+artifacts
+models
+*.gguf
+*.safetensors
+adapters/

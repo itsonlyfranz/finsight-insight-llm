@@ -1,0 +1,77 @@
+Loading configuration file configs/lora.yaml
+Loading pretrained model
+Loading datasets
+Training
+╭─ mlx_lm.lora ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    model           models/Qwen2.5-1.5B-Instruct                                                                      │
+│    type            lora · 28 layers · rank 16                                                                        │
+│    dataset         data                                                                                              │
+│    optimizer       adamw · lr 2.0e-05                                                                                │
+│    batch · iters   4 · 600                                                                                           │
+│    max seq         768                                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Trainable parameters: 1.196% (18.465M/1543.714M)
+  iter   train_loss     tok/s     tokens
+     1    val 1.939    33.56s
+    20    1.081 ▼      107      5.6k
+    40    0.508 ▼      109     11.2k
+    60    0.265 ▼      108     16.7k
+    80    0.171 ▼      108     22.2k
+   100    val 0.077    33.37s
+   100    0.107 ▼      106     27.6k
+  save  0000100_adapters.safetensors
+   120    0.063 ▼      104     33.0k
+   140    0.060 ▼       99     38.2k
+   160    0.071 ▲      105     43.6k
+   180    0.055 ▼      103     49.0k
+   200    val 0.048    33.41s
+   200    0.046 ▼      104     54.3k
+  save  0000200_adapters.safetensors
+   220    0.045 ▼      105     59.8k
+   240    0.049 ▲      106     65.3k
+   260    0.042 ▼      107     70.7k
+   280    0.036 ▼      103     76.1k
+   300    val 0.037    33.36s
+   300    0.040 ▲      107     81.6k
+  save  0000300_adapters.safetensors
+   320    0.038 ▼      105     87.1k
+   340    0.040 ▲      102     92.4k
+   360    0.036 ▼      104     97.8k
+   380    0.037 ▲      105    103.4k
+   400    val 0.035    33.44s
+   400    0.036 ▼      106    108.9k
+  save  0000400_adapters.safetensors
+   420    0.034 ▼      109    114.6k
+   440    0.037 ▲      102    119.9k
+   460    0.035 ▼      106    125.4k
+   480    0.033 ▼      103    130.6k
+   500    val 0.035    33.41s
+   500    0.035 ▲      106    135.9k
+  save  0000500_adapters.safetensors
+   520    0.035 ▲      103    141.4k
+   540    0.036 ▲      106    146.9k
+   560    0.035 ▼      106    152.1k
+   580    0.035 ▲      105    157.6k
+   600    val 0.034    33.38s
+   600    0.034 ▼      105    163.0k
+  save  0000600_adapters.safetensors
+train ██████████████████████████████ 100% ·   600/600
+     1789.98 real        68.96 user       280.34 sys
+          3677536256  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              302984  page reclaims
+                4669  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                3607  voluntary context switches
+             1081063  involuntary context switches
+       1866527739725  instructions retired
+        798939386137  cycles elapsed
+         14554419016  peak memory footprint
+wall_clock_seconds: 1790

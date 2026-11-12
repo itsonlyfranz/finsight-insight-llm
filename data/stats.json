@@ -1,0 +1,62 @@
+{
+  "seed": 20260512,
+  "splits": {
+    "train": {
+      "examples": 1618,
+      "by_task": {
+        "insight": 842,
+        "simulation": 472,
+        "goal": 304
+      },
+      "by_kind": {
+        "insight_emergency_fund_status": 181,
+        "simulation": 472,
+        "goal": 304,
+        "insight_subscription_drift": 76,
+        "insight_tip_13th_month_pay": 115,
+        "insight_discretionary_growth": 204,
+        "insight_tech_gadget_spike": 55,
+        "insight_tip_employer_stipend": 115,
+        "insight_cafe_lifestyle_inflation": 96
+      }
+    },
+    "valid": {
+      "examples": 114,
+      "by_task": {
+        "insight": 53,
+        "simulation": 37,
+        "goal": 24
+      },
+      "by_kind": {
+        "insight_tip_13th_month_pay": 5,
+        "simulation": 37,
+        "insight_emergency_fund_status": 10,
+        "goal": 24,
+        "insight_discretionary_growth": 15,
+        "insight_tip_employer_stipend": 8,
+        "insight_cafe_lifestyle_inflation": 8,
+        "insight_tech_gadget_spike": 5,
+        "insight_subscription_drift": 2
+      }
+    },
+    "test": {
+      "examples": 246,
+      "by_task": {
+        "insight": 117,
+        "simulation": 78,
+        "goal": 51
+      },
+      "by_kind": {
+        "insight_subscription_drift": 14,
+        "simulation": 78,
+        "insight_discretionary_growth": 33,
+        "goal": 51,
+        "insight_emergency_fund_status": 34,
+        "insight_cafe_lifestyle_inflation": 11,
+        "insight_tip_13th_month_pay": 6,
+        "insight_tech_gadget_spike": 7,
+        "insight_tip_employer_stipend": 12
+      }
+    }
+  }
+}

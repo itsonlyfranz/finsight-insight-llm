@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 97.5609756097561,
+  "format_valid_pct": 58.94308943089431,
+  "accepted_pct": 97.5609756097561,
+  "clean_pass_pct": 56.91056910569106,
+  "rouge_l": 0.21816381305107163,
+  "fact_coverage": 0.6307588075880759,
+  "decode_tok_per_s": 47.88163743621237,
+  "mean_latency_s": 1.9077361039913163,
+  "p95_latency_s": 3.0749340420006774,
+  "mean_output_tokens": 91.34552845528455,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 37.254901960784316,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 37.254901960784316,
+      "rouge_l": 0.18456709326670243,
+      "fact_coverage": 0.2222222222222222,
+      "decode_tok_per_s": 42.818485632090216,
+      "mean_latency_s": 0.8934202458602194,
+      "p95_latency_s": 1.2972655420016963,
+      "mean_output_tokens": 38.254901960784316
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 99.14529914529915,
+      "format_valid_pct": 48.717948717948715,
+      "accepted_pct": 99.14529914529915,
+      "clean_pass_pct": 48.717948717948715,
+      "rouge_l": 0.2569203393072512,
+      "fact_coverage": 0.5925925925925926,
+      "decode_tok_per_s": 48.05937426574934,
+      "mean_latency_s": 2.11081492412899,
+      "p95_latency_s": 3.2069658330001403,
+      "mean_output_tokens": 101.44444444444444
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 93.58974358974359,
+      "format_valid_pct": 88.46153846153847,
+      "accepted_pct": 93.58974358974359,
+      "clean_pass_pct": 82.05128205128206,
+      "rouge_l": 0.18199610967965907,
+      "fact_coverage": 0.9551282051282052,
+      "decode_tok_per_s": 48.9383852488174,
+      "mean_latency_s": 2.266324396408984,
+      "p95_latency_s": 2.670538417005446,
+      "mean_output_tokens": 110.91025641025641
+    }
+  },
+  "peak_mem_gb": 3.411505396,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 0,
+  "meta": {
+    "name": "base",
+    "variant": "base",
+    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant base --out results/raw/base.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": null,
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2-arm64-arm-64bit",
+    "started": "2026-11-12T13:25:03+0800"
+  }
+}

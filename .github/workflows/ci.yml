@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies (data generator and guard need only pytest)
+        run: pip install pytest
+      - name: Unit tests
+        run: PYTHONPATH=src pytest -q
+      - name: Dataset is reproducible (committed files match a fresh generation)
+        run: |
+          PYTHONPATH=src python -m finsight_llm.dataset --out /tmp/data
+          for s in train valid test; do cmp data/$s.jsonl /tmp/data/$s.jsonl; done

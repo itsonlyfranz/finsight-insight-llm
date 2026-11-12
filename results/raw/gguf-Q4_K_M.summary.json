@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 97.96747967479675,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 97.96747967479675,
+  "rouge_l": 0.4344310314088955,
+  "fact_coverage": 0.8455284552845529,
+  "decode_tok_per_s": 83.46335483786102,
+  "mean_latency_s": 0.7557476678824363,
+  "p95_latency_s": 1.170851583010517,
+  "mean_output_tokens": 63.077235772357724,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4175721635767201,
+      "fact_coverage": 0.630718954248366,
+      "decode_tok_per_s": 78.78392733477834,
+      "mean_latency_s": 0.4619236193710308,
+      "p95_latency_s": 0.5151015419978648,
+      "mean_output_tokens": 36.3921568627451
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 95.72649572649573,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 95.72649572649573,
+      "rouge_l": 0.4854770779278239,
+      "fact_coverage": 0.9572649572649573,
+      "decode_tok_per_s": 84.65165034052222,
+      "mean_latency_s": 0.9441408005818669,
+      "p95_latency_s": 1.1806659169960767,
+      "mean_output_tokens": 79.92307692307692
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.36888506752077144,
+      "fact_coverage": 0.8183760683760684,
+      "decode_tok_per_s": 83.05816215107755,
+      "mean_latency_s": 0.6652736928599785,
+      "p95_latency_s": 0.8668892499990761,
+      "mean_output_tokens": 55.256410256410255
+    }
+  },
+  "peak_mem_gb": null,
+  "model_size_bytes": 986048288,
+  "adapter_size_bytes": 0,
+  "meta": {
+    "name": "gguf-Q4_K_M",
+    "variant": "gguf",
+    "command": "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/evaluate.py --variant gguf --gguf artifacts/gguf/finsight-insight-qwen2.5-1.5b-Q4_K_M.gguf --name gguf-Q4_K_M --out results/raw/gguf-Q4_K_M.jsonl",
+    "model": "artifacts/gguf/finsight-insight-qwen2.5-1.5b-Q4_K_M.gguf",
+    "adapter": null,
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2-arm64-arm-64bit",
+    "started": "2026-11-12T13:55:53+0800"
+  }
+}
