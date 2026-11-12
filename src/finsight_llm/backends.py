@@ -65,6 +65,13 @@ class LlamaServerBackend:
             [exe, "-m", gguf_path, "--port", str(self.port), "-c", str(ctx), "-ngl", "99", "--jinja",
              "--no-webui", "--parallel", "1", *(extra_args or [])],
             stdout=self.log, stderr=subprocess.STDOUT)
+        try:
+            self._wait_healthy()
+        except BaseException:
+            self.close()
+            raise
+
+    def _wait_healthy(self) -> None:
         deadline = time.time() + 180
         while time.time() < deadline:
             if self.proc.poll() is not None:

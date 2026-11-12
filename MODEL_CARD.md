@@ -69,12 +69,12 @@ LoRA rank 16, scale 20, dropout 0.05 on all attention and MLP projections (28 la
 
 | Model | Number fidelity | Format valid | ROUGE-L | Fact coverage | Decode tok/s | Size |
 |---|---|---|---|---|---|---|
-| Base, zero-shot | 97.6% | 58.9% | 0.218 | 0.631 | 47.9 | 3,099 MB |
-| Base + 2-shot | 100.0% | 95.1% | 0.335 | 0.894 | 39.3 | 3,099 MB |
-| Fine-tuned (MLX bf16) | 100.0% | 100.0% | 0.429 | 0.881 | 30.5 | 3,099 MB + 74 MB |
-| Fine-tuned GGUF Q8_0 | 100.0% | 100.0% | 0.425 | 0.913 | 71.8 | 1,647 MB |
-| **Fine-tuned GGUF Q5_K_M** | 100.0% | 100.0% | 0.428 | 0.894 | 70.9 | 1,125 MB |
-| Fine-tuned GGUF Q4_K_M | 100.0% | 98.0% | 0.434 | 0.846 | 83.5 | 986 MB |
+| Base, zero-shot | 97.6% | 58.9% | 0.252 | 0.631 | 47.9 | 3,099 MB |
+| Base + 2-shot | 100.0% | 95.1% | 0.373 | 0.894 | 39.3 | 3,099 MB |
+| Fine-tuned (MLX bf16) | 100.0% | 100.0% | 0.454 | 0.881 | 30.5 | 3,099 MB + 74 MB |
+| Fine-tuned GGUF Q8_0 | 100.0% | 100.0% | 0.447 | 0.913 | 71.8 | 1,647 MB |
+| **Fine-tuned GGUF Q5_K_M** | 100.0% | 100.0% | 0.456 | 0.894 | 70.9 | 1,125 MB |
+| Fine-tuned GGUF Q4_K_M | 100.0% | 98.0% | 0.458 | 0.846 | 83.5 | 986 MB |
 
 Number fidelity is the pass rate of a port of the app's money-figure guard. Speeds are llama.cpp (GGUF rows) and mlx-lm (MLX rows) on one M2 Pro; see the repository README for definitions and caveats.
 

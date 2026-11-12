@@ -7,7 +7,7 @@ from statistics import mean
 from . import guard
 
 _SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
-_TOKEN = re.compile(r"[a-z0-9₱.,%]+")
+_TOKEN = re.compile(r"₱?\d+(?:,\d{3})*(?:\.\d+)?%?|[a-z]+")
 
 
 def sentences(text: str) -> list[str]:

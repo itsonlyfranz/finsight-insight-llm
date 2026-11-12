@@ -1,6 +1,6 @@
 # finsight-insight-llm
 
-**Fine-tuned a 1.5B open model to write FinSight's spending insights from the app's own facts. Against the base model and a 2-shot prompt-only baseline, on a held-out test set, the fine-tuned model follows the output format on 100% of prompts (base zero-shot: 58.9%) and roughly doubles reference overlap (ROUGE-L 0.43 vs 0.22 base). Quantized to GGUF, the `Q5_K_M` file is 1.1 GB and decodes at about 71 tokens/s on an M2 Pro with no loss on any measured metric.**
+**Fine-tuned a 1.5B open model to write FinSight's spending insights from the app's own facts. Against the base model and a 2-shot prompt-only baseline, on a held-out test set, the fine-tuned model follows the output format on 100% of prompts (base zero-shot: 58.9%) and raises reference overlap from ROUGE-L 0.252 (base) and 0.373 (2-shot) to 0.454. Quantized to GGUF, the `Q5_K_M` file is 1.1 GB and decodes at about 71 tokens/s on an M2 Pro with no loss in number fidelity or format validity; fact coverage is 0.894 vs 0.920 for the f16 GGUF.**
 
 FinSight is a personal-finance Android app. Its deterministic engines compute every number and a default wording; a model is only allowed to *re-phrase* those facts, and any output containing a money figure that is not in the facts is thrown away (the "number guard"). This project trains a small model for that job and measures it the way the product would judge it.
 
@@ -12,19 +12,19 @@ Held-out test split: 246 examples (117 insight, 78 simulation, 51 goal) that the
 
 | Model | Number fidelity | Format valid | ROUGE-L | Fact coverage | Decode tok/s | Mean latency | Size on disk |
 |---|---|---|---|---|---|---|---|
-| Base, zero-shot (MLX bf16) | 97.6% | 58.9% | 0.218 | 0.631 | 47.9 | 1.91 s | 3,099 MB |
-| Base + 2-shot prompt (MLX bf16) | 100.0% | 95.1% | 0.335 | 0.894 | 39.3 | 1.94 s | 3,099 MB |
-| **Fine-tuned (LoRA), zero-shot (MLX bf16)** | 100.0% | 100.0% | 0.429 | 0.881 | 30.5 | 2.17 s | 3,099 MB + 74 MB adapter |
-| Fine-tuned, GGUF f16 | 100.0% | 100.0% | 0.425 | 0.920 | 47.1 | 1.45 s | 3,094 MB |
-| Fine-tuned, GGUF Q8_0 | 100.0% | 100.0% | 0.425 | 0.913 | 71.8 | 0.95 s | 1,647 MB |
-| **Fine-tuned, GGUF Q5_K_M** (winner) | 100.0% | 100.0% | 0.428 | 0.894 | 70.9 | 0.92 s | 1,125 MB |
-| Fine-tuned, GGUF Q4_K_M | 100.0% | 98.0% | 0.434 | 0.846 | 83.5 | 0.76 s | 986 MB |
+| Base, zero-shot (MLX bf16) | 97.6% | 58.9% | 0.252 | 0.631 | 47.9 | 1.91 s | 3,099 MB |
+| Base + 2-shot prompt (MLX bf16) | 100.0% | 95.1% | 0.373 | 0.894 | 39.3 | 1.94 s | 3,099 MB |
+| **Fine-tuned (LoRA), zero-shot (MLX bf16)** | 100.0% | 100.0% | 0.454 | 0.881 | 30.5 | 2.17 s | 3,099 MB + 74 MB adapter |
+| Fine-tuned, GGUF f16 | 100.0% | 100.0% | 0.448 | 0.920 | 47.1 | 1.45 s | 3,094 MB |
+| Fine-tuned, GGUF Q8_0 | 100.0% | 100.0% | 0.447 | 0.913 | 71.8 | 0.95 s | 1,647 MB |
+| **Fine-tuned, GGUF Q5_K_M** (winner) | 100.0% | 100.0% | 0.456 | 0.894 | 70.9 | 0.92 s | 1,125 MB |
+| Fine-tuned, GGUF Q4_K_M | 100.0% | 98.0% | 0.458 | 0.846 | 83.5 | 0.76 s | 986 MB |
 
 Metric definitions:
 
 - **Number fidelity**: share of outputs where every money figure appears in the facts (a port of the app's `NumberGuard`, tolerance ₱0.51). Higher is better; this is the property the product enforces.
 - **Format valid**: the raw output follows the contract the app asks for: `insight` is exactly two lines `INSIGHT:` (at most two sentences) and `ACTION:` (one sentence); `simulation` is two to three sentences; `goal` is one sentence of at most 30 words; no markdown or reasoning blocks.
-- **ROUGE-L**: word-level ROUGE-L F1 against the reference text. See the caveat below.
+- **ROUGE-L**: word-level ROUGE-L F1 against the reference text (lowercased words and whole money figures; punctuation is not part of a token). See the caveat below.
 - **Fact coverage**: share of the reference's money figures that the output also states (does it actually use the numbers it was given).
 - **Decode tok/s, latency**: mean over the 246 test prompts, from the runtime that produced the row. MLX rows use `mlx-lm`; GGUF rows use `llama-server` (llama.cpp, Metal, all layers offloaded) over local HTTP, so the two groups are different runtimes and not a pure quantization comparison. The fine-tuned MLX row is slower than the base because the adapter is applied unfused at run time; fusing it (the GGUF rows) removes that cost.
 
@@ -34,15 +34,15 @@ Per-task tables (number fidelity, format validity, ROUGE-L) are in [`results/RES
 
 - **Fine-tuning fixes format and style, not just numbers.** Zero-shot, the base model follows the contract on only 58.9% of prompts (48.7% for insights, 37.3% for goals). Two worked examples in the prompt bring that to 95.1% at the price of a longer prompt; the fine-tuned model reaches 100% with the short, production prompt.
 - **Number fidelity was already high for this task** because the facts contain every figure the model needs: the base model failed the guard on 2.4% of outputs (6 of 246: 5 simulation, 1 insight), e.g. a simulation answer that derived a daily saving of ₱17.27 that is not in the facts. With either a few-shot prompt or fine-tuning it was 100%. The guard remains the safety net; fine-tuning removes the need to fall back to the deterministic text.
-- **Fine-tuning buys quality over the prompt-only baseline**: ROUGE-L 0.429 vs 0.335 (few-shot) and 0.218 (base); the gap is largest for insights (0.504 vs 0.404) and goals (0.487 vs 0.295).
-- **Quantization is nearly free here.** Q8_0 and Q5_K_M match the f16 GGUF on format and fidelity, with ROUGE-L within 0.004. Q4_K_M is the smallest (986 MB) and fastest (83.5 tok/s) but is the only quant that breaks the format contract (98.0% valid; 95.7% on insights) and has the lowest fact coverage (0.846), so Q5_K_M is the pick.
+- **Fine-tuning buys quality over the prompt-only baseline**: ROUGE-L 0.454 vs 0.373 (few-shot) and 0.252 (base); the gap is largest for insights (0.517 vs 0.433) and goals (0.513 vs 0.331).
+- **Quantization costs little here, but not nothing.** Q8_0 and Q5_K_M match the f16 GGUF on format and fidelity, with ROUGE-L within 0.009; fact coverage drops from 0.920 (f16) to 0.913 (Q8_0) and 0.894 (Q5_K_M). Q4_K_M is the smallest (986 MB) and fastest (83.5 tok/s) but is the only quant that breaks the format contract (98.0% valid; 95.7% on insights) and has the lowest fact coverage (0.846), so Q5_K_M is the pick.
 
-**Winner: fine-tuned model, GGUF `Q5_K_M`** (1,125 MB, 70.9 tok/s, 0.92 s mean latency, 100% fidelity and format). Q8_0 gives no measurable gain for 46% more bytes.
+**Winner: fine-tuned model, GGUF `Q5_K_M`** (1,125 MB, 70.9 tok/s, 0.92 s mean latency, 100% fidelity and format). Q8_0 adds 0.019 fact coverage (0.913 vs 0.894) for 46% more bytes, and no gain on fidelity or format.
 
 ### Caveats on these numbers
 
 - **The references are templated**, not human-written (see [`DATASET_CARD.md`](DATASET_CARD.md)). A fine-tuned model imitating those phrasings scores high ROUGE-L by construction, and the base/few-shot models are penalized for a perfectly reasonable different wording. ROUGE-L therefore measures "closeness to this house style", not absolute quality. No LLM-as-judge was run: no judge model beyond the one under test was available offline, and judging with the model under test would be circular.
-- **One run, one seed, one test set of 246.** Differences of a few ROUGE-L points between quantizations (e.g. 0.425 vs 0.434) are within noise; I did not compute confidence intervals.
+- **One run, one seed, one test set of 246.** Differences of a few ROUGE-L points between quantizations (e.g. 0.447 vs 0.458) are within noise; I did not compute confidence intervals.
 - **The test set comes from the same synthetic generator as the training data.** It shows that the model learned the task and the format, not that it generalizes to real user data or to facts the generator cannot produce.
 - Speeds are for this machine, with one request at a time.
 
@@ -111,6 +111,7 @@ make data test                               # regenerate data/ (identical to th
 make train                                   # LoRA fine-tune (about 30 min on an M2 Pro)
 LLAMA_CPP_SRC=/path/to/llama.cpp make export # fuse + GGUF f16 + Q8_0/Q5_K_M/Q4_K_M
 make eval                                    # base, few-shot, fine-tuned, every GGUF -> results/RESULTS.md
+PYTHONPATH=src python -m finsight_llm.rescore # optional: re-score stored outputs without re-running models
 ```
 
 Run `make eval` on an otherwise idle machine; latency and tokens/s are part of the output. Raw outputs are written to `results/raw/<name>.jsonl` (first line is metadata with the command), summaries to `results/raw/<name>.summary.json`.

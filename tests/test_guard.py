@@ -7,7 +7,10 @@ FACTS = "Freed cashflow per month: ₱1,928.41\nSavings after 12 months: ₱23,7
 def test_money_format():
     assert fmt(1234.5) == "₱1,234.50"
     assert fmt(-1234.5) == "-₱1,234.50"
-    assert fmt_whole(1234.5) == "₱1,234" or fmt_whole(1234.5) == "₱1,235"  # tie handling differs by runtime
+    assert fmt_whole(1234.5) == "₱1,235"  # Kotlin String.format("%,.0f") rounds HALF_UP
+    assert fmt_whole(2.5) == "₱3"
+    assert fmt_whole(-2.5) == "-₱3"
+    assert fmt_whole(0.4) == "₱0"
     assert fmt_whole(1234.6) == "₱1,235"
 
 

@@ -152,7 +152,7 @@ def to_chat(row: dict) -> dict:
     return {"messages": msgs}
 
 
-def write(out_dir: Path, splits: dict[str, list[dict]]) -> dict:
+def write(out_dir: Path, splits: dict[str, list[dict]], seed: int = SEED) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
     stats = {}
     for split, rows in splits.items():
@@ -164,7 +164,7 @@ def write(out_dir: Path, splits: dict[str, list[dict]]) -> dict:
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         stats[split] = {"examples": len(rows), "by_task": dict(Counter(r["task"] for r in rows)),
                         "by_kind": dict(Counter(r["kind"] for r in rows))}
-    (out_dir / "stats.json").write_text(json.dumps({"seed": SEED, "splits": stats}, indent=2) + "\n")
+    (out_dir / "stats.json").write_text(json.dumps({"seed": seed, "splits": stats}, indent=2) + "\n")
     return stats
 
 
@@ -173,7 +173,7 @@ def main() -> None:
     ap.add_argument("--out", default="data", type=Path)
     ap.add_argument("--seed", default=SEED, type=int)
     args = ap.parse_args()
-    stats = write(args.out, generate(args.seed))
+    stats = write(args.out, generate(args.seed), args.seed)
     print(json.dumps(stats, indent=2))
 
 
