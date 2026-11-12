@@ -25,7 +25,7 @@ A LoRA fine-tune of **Qwen2.5-1.5B-Instruct** that rewrites structured personal-
 | File | Size | Notes |
 |---|---|---|
 | `finsight-insight-qwen2.5-1.5b-Q5_K_M.gguf` | 1,125,050,144 B (1.1 GB) | **recommended** |
-| `finsight-insight-qwen2.5-1.5b-Q8_0.gguf` | 1,646,572,832 B (1.6 GB) | no measurable gain over Q5_K_M |
+| `finsight-insight-qwen2.5-1.5b-Q8_0.gguf` | 1,646,572,832 B (1.6 GB) | higher fact coverage than Q5_K_M (0.913 vs 0.894), 46% larger |
 | `finsight-insight-qwen2.5-1.5b-Q4_K_M.gguf` | 986,048,288 B (0.99 GB) | smallest/fastest; occasionally breaks the format |
 | `finsight-insight-qwen2.5-1.5b-f16.gguf` | 3,093,669,152 B (3.1 GB) | reference |
 | LoRA adapter (`adapters.safetensors`) | 73,901,662 B (74 MB) | for use with the base model in MLX |
