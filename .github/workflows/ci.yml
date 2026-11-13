@@ -18,3 +18,9 @@ jobs:
         run: |
           PYTHONPATH=src python -m finsight_llm.dataset --out /tmp/data
           for s in train valid test; do cmp data/$s.jsonl /tmp/data/$s.jsonl; done
+      - name: Stress set and preference pairs are reproducible
+        run: |
+          PYTHONPATH=src python -m finsight_llm.stress --out /tmp/stress.jsonl
+          cmp data/stress.jsonl /tmp/stress.jsonl
+          PYTHONPATH=src python -m finsight_llm.preferences --samples data/preferences/sft_samples.jsonl --out /tmp/prefs
+          for s in train valid; do cmp data/preferences/$s.jsonl /tmp/prefs/$s.jsonl; done

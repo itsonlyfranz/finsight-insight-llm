@@ -1,0 +1,68 @@
+{
+  "n": 234,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.4642408112966099,
+  "fact_coverage": 0.8418803418803419,
+  "decode_tok_per_s": 28.677765114645798,
+  "mean_latency_s": 2.3483752508928952,
+  "p95_latency_s": 2.96581866699853,
+  "mean_output_tokens": 67.34615384615384,
+  "by_task": {
+    "goal": {
+      "n": 49,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4559332619337463,
+      "fact_coverage": 0.47619047619047616,
+      "decode_tok_per_s": 26.089009965194695,
+      "mean_latency_s": 1.504269346040353,
+      "p95_latency_s": 2.029296125001565,
+      "mean_output_tokens": 39.244897959183675
+    },
+    "insight": {
+      "n": 108,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.5326311626750393,
+      "fact_coverage": 0.9259259259259259,
+      "decode_tok_per_s": 29.098187484820457,
+      "mean_latency_s": 2.7028538526386305,
+      "p95_latency_s": 3.0804072080063634,
+      "mean_output_tokens": 78.64814814814815
+    },
+    "simulation": {
+      "n": 77,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.3736033044123234,
+      "fact_coverage": 0.9567099567099567,
+      "decode_tok_per_s": 29.04801761632461,
+      "mean_latency_s": 2.3883427878959496,
+      "p95_latency_s": 2.748824957998295,
+      "mean_output_tokens": 69.37662337662337
+    }
+  },
+  "peak_mem_gb": 4.22782254,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 73901662,
+  "meta": {
+    "name": "sft-stress",
+    "variant": "finetuned",
+    "command": "python -m finsight_llm.evaluate --variant finetuned --adapter artifacts/adapters --test data/stress.jsonl --name sft-stress --out results/dpo/raw/sft-stress.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": "artifacts/adapters",
+    "decoding": "greedy (temperature 0)",
+    "n_test": 234,
+    "machine": "macOS-27.2.1-arm64-arm-64bit",
+    "started": "2026-11-13T12:04:01+0800"
+  }
+}

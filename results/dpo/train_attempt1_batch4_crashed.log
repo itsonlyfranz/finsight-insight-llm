@@ -1,0 +1,44 @@
+trainable params 18.465M | train pairs 4217 | valid pairs 469 | beta 0.1 lr 5e-06 iters 1000 batch 4
+reference log-probs for 4686 pairs in 2986s
+iter 0 | valid loss 0.6931 (ln2 = 0.6931) acc 0.000 margin 0.000
+iter 20 | train loss 0.6947 acc 0.475 | 10.64s/it | peak 23.34 GB
+iter 40 | train loss 0.6907 acc 0.562 | 11.04s/it | peak 23.34 GB
+iter 60 | train loss 0.6917 acc 0.512 | 11.11s/it | peak 24.20 GB
+iter 80 | train loss 0.6828 acc 0.600 | 11.26s/it | peak 24.20 GB
+iter 100 | train loss 0.6690 acc 0.613 | 11.29s/it | peak 24.20 GB
+iter 100 | valid loss 0.6710 acc 0.576 margin 0.541
+iter 120 | train loss 0.6774 acc 0.475 | 13.57s/it | peak 24.37 GB
+iter 140 | train loss 0.6505 acc 0.537 | 13.17s/it | peak 24.65 GB
+iter 160 | train loss 0.6558 acc 0.725 | 12.87s/it | peak 24.65 GB
+iter 180 | train loss 0.6544 acc 0.650 | 12.64s/it | peak 24.65 GB
+iter 200 | train loss 0.6653 acc 0.588 | 12.61s/it | peak 24.65 GB
+iter 200 | valid loss 0.6565 acc 0.646 margin 0.967
+iter 220 | train loss 0.6674 acc 0.550 | 13.80s/it | peak 24.65 GB
+iter 240 | train loss 0.6529 acc 0.738 | 13.59s/it | peak 24.65 GB
+iter 260 | train loss 0.6458 acc 0.625 | 13.44s/it | peak 24.65 GB
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/dpo.py", line 226, in <module>
+    main()
+  File "/Users/francisco/.treehouse/finsight-insight-llm-6be253/1/finsight-insight-llm/src/finsight_llm/dpo.py", line 195, in main
+    mx.eval(model.parameters(), opt.state, loss, z)
+RuntimeError: [METAL] Command buffer execution failed: Impacting Interactivity (0000000e:kIOGPUCommandBufferCallbackErrorImpactingInteractivity).
+     6857.92 real        75.24 user      3195.17 sys
+          3627286528  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              616161  page reclaims
+                4302  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+             1271226  voluntary context switches
+            18422564  involuntary context switches
+      11468747791158  instructions retired
+      10255964579721  cycles elapsed
+         30971088688  peak memory footprint

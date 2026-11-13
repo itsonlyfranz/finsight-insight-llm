@@ -1,0 +1,51 @@
+{
+  "seed": 20260613,
+  "source_rows": 1618,
+  "used_sft_samples": true,
+  "splits": {
+    "train": {
+      "pairs": 4217,
+      "prompts": 1456,
+      "by_task": {
+        "insight": 2225,
+        "simulation": 1247,
+        "goal": 745
+      },
+      "by_source": {
+        "synthetic": 2775,
+        "sft_sample": 1442
+      },
+      "by_rejected_type": {
+        "broken_format": 823,
+        "changed_figure": 690,
+        "sft_sample": 1442,
+        "invented_figure": 481,
+        "vague_text": 303,
+        "misattributed_figure": 217,
+        "off_topic_text": 261
+      }
+    },
+    "valid": {
+      "pairs": 469,
+      "prompts": 162,
+      "by_task": {
+        "simulation": 168,
+        "insight": 189,
+        "goal": 112
+      },
+      "by_source": {
+        "synthetic": 309,
+        "sft_sample": 160
+      },
+      "by_rejected_type": {
+        "off_topic_text": 30,
+        "changed_figure": 72,
+        "sft_sample": 160,
+        "broken_format": 88,
+        "misattributed_figure": 36,
+        "invented_figure": 52,
+        "vague_text": 31
+      }
+    }
+  }
+}

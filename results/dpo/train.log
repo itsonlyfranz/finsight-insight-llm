@@ -1,0 +1,76 @@
+trainable params 18.465M | train pairs 1800 | valid pairs 469 | beta 0.1 lr 1e-05 iters 900 batch 2
+reference log-probs for 2269 pairs in 1337s
+iter 0 | valid loss 0.6931 (ln2 = 0.6931) acc 0.000 margin 0.000
+iter 20 | train loss 0.6780 acc 0.450 | 3.76s/it | peak 10.82 GB
+iter 40 | train loss 0.6824 acc 0.500 | 3.76s/it | peak 10.87 GB
+iter 60 | train loss 0.6970 acc 0.575 | 3.74s/it | peak 10.87 GB
+iter 80 | train loss 0.6912 acc 0.500 | 3.68s/it | peak 10.87 GB
+iter 100 | train loss 0.7117 acc 0.450 | 3.72s/it | peak 10.99 GB
+iter 100 | valid loss 0.6908 acc 0.495 margin 0.073
+iter 120 | train loss 0.6889 acc 0.550 | 6.38s/it | peak 10.99 GB
+iter 140 | train loss 0.7087 acc 0.350 | 6.01s/it | peak 10.99 GB
+iter 160 | train loss 0.6993 acc 0.400 | 5.74s/it | peak 10.99 GB
+iter 180 | train loss 0.6846 acc 0.500 | 5.53s/it | peak 11.17 GB
+iter 200 | train loss 0.6446 acc 0.750 | 5.38s/it | peak 11.20 GB
+iter 200 | valid loss 0.6686 acc 0.582 margin 0.623
+iter 220 | train loss 0.6520 acc 0.750 | 6.63s/it | peak 11.20 GB
+iter 240 | train loss 0.6120 acc 0.725 | 6.40s/it | peak 11.20 GB
+iter 260 | train loss 0.6624 acc 0.625 | 6.19s/it | peak 11.20 GB
+iter 280 | train loss 0.6834 acc 0.550 | 6.02s/it | peak 11.20 GB
+iter 300 | train loss 0.6466 acc 0.525 | 5.88s/it | peak 11.20 GB
+iter 300 | valid loss 0.6493 acc 0.588 margin 1.315
+iter 320 | train loss 0.6330 acc 0.750 | 6.69s/it | peak 11.23 GB
+iter 340 | train loss 0.5925 acc 0.700 | 6.52s/it | peak 11.23 GB
+iter 360 | train loss 0.6476 acc 0.575 | 6.37s/it | peak 11.23 GB
+iter 380 | train loss 0.6945 acc 0.450 | 6.23s/it | peak 11.23 GB
+iter 400 | train loss 0.6321 acc 0.550 | 6.12s/it | peak 11.23 GB
+iter 400 | valid loss 0.6249 acc 0.627 margin 2.434
+iter 420 | train loss 0.6137 acc 0.525 | 6.70s/it | peak 11.23 GB
+iter 440 | train loss 0.6969 acc 0.625 | 6.56s/it | peak 11.23 GB
+iter 460 | train loss 0.6490 acc 0.550 | 6.44s/it | peak 11.23 GB
+iter 480 | train loss 0.5745 acc 0.625 | 6.33s/it | peak 11.23 GB
+iter 500 | train loss 0.5798 acc 0.625 | 6.23s/it | peak 11.23 GB
+iter 500 | valid loss 0.6379 acc 0.601 margin 2.534
+iter 520 | train loss 0.6403 acc 0.525 | 6.73s/it | peak 11.23 GB
+iter 540 | train loss 0.6636 acc 0.500 | 6.61s/it | peak 11.23 GB
+iter 560 | train loss 0.6544 acc 0.550 | 6.51s/it | peak 11.23 GB
+iter 580 | train loss 0.6515 acc 0.625 | 6.41s/it | peak 11.23 GB
+iter 600 | train loss 0.5624 acc 0.675 | 6.33s/it | peak 11.23 GB
+iter 600 | valid loss 0.6533 acc 0.578 margin 2.322
+iter 620 | train loss 0.6982 acc 0.475 | 6.75s/it | peak 11.23 GB
+iter 640 | train loss 0.6169 acc 0.475 | 6.66s/it | peak 11.23 GB
+iter 660 | train loss 0.7807 acc 0.550 | 6.59s/it | peak 11.23 GB
+iter 680 | train loss 0.5883 acc 0.700 | 6.53s/it | peak 11.23 GB
+iter 700 | train loss 0.6530 acc 0.650 | 6.47s/it | peak 11.23 GB
+iter 700 | valid loss 0.6683 acc 0.571 margin 2.171
+iter 720 | train loss 0.6286 acc 0.575 | 6.86s/it | peak 11.23 GB
+iter 740 | train loss 0.6840 acc 0.550 | 6.80s/it | peak 11.23 GB
+iter 760 | train loss 0.6982 acc 0.550 | 6.72s/it | peak 11.23 GB
+iter 780 | train loss 0.6370 acc 0.725 | 6.65s/it | peak 11.23 GB
+iter 800 | train loss 0.6385 acc 0.500 | 6.58s/it | peak 11.23 GB
+iter 800 | valid loss 0.6797 acc 0.563 margin 1.998
+iter 820 | train loss 0.7408 acc 0.550 | 6.91s/it | peak 11.23 GB
+iter 840 | train loss 0.7558 acc 0.500 | 6.85s/it | peak 11.23 GB
+iter 860 | train loss 0.8191 acc 0.475 | 6.80s/it | peak 11.23 GB
+iter 880 | train loss 0.6872 acc 0.450 | 6.73s/it | peak 11.23 GB
+iter 900 | train loss 0.6790 acc 0.500 | 6.67s/it | peak 11.23 GB
+iter 900 | valid loss 0.6859 acc 0.557 margin 1.862
+{"beta": 0.1, "lr": 1e-05, "iters": 900, "batch_pairs": 2, "diverged": false, "train_pairs": 1800, "valid_pairs": 469, "trainable_params": 18464768, "seconds": 6324.19685792923, "peak_memory_gb": 11.225653474, "sft_alpha": 0.0, "grad_checkpoint": true, "grad_clip": 1.0}
+     7988.70 real       191.97 user      2680.93 sys
+          3602038784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              812112  page reclaims
+                1917  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              570964  voluntary context switches
+            21729164  involuntary context switches
+      11377703714860  instructions retired
+       8594046345465  cycles elapsed
+         28307394328  peak memory footprint

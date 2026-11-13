@@ -1,0 +1,68 @@
+{
+  "n": 234,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.4353922573915504,
+  "fact_coverage": 0.7877492877492878,
+  "decode_tok_per_s": 28.549042589780363,
+  "mean_latency_s": 2.170054959221947,
+  "p95_latency_s": 2.931214041003841,
+  "mean_output_tokens": 61.952991452991455,
+  "by_task": {
+    "goal": {
+      "n": 49,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4468091849118974,
+      "fact_coverage": 0.5170068027210885,
+      "decode_tok_per_s": 27.031093061092008,
+      "mean_latency_s": 1.6217152075501984,
+      "p95_latency_s": 2.199418166994292,
+      "mean_output_tokens": 43.83673469387755
+    },
+    "insight": {
+      "n": 108,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.5003354633037037,
+      "fact_coverage": 0.9305555555555556,
+      "decode_tok_per_s": 29.3252751901596,
+      "mean_latency_s": 2.6658207099164293,
+      "p95_latency_s": 2.939848541995161,
+      "mean_output_tokens": 78.17592592592592
+    },
+    "simulation": {
+      "n": 77,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.33703776794986784,
+      "fact_coverage": 0.7597402597402597,
+      "decode_tok_per_s": 27.816514965799062,
+      "mean_latency_s": 1.8236386833376819,
+      "p95_latency_s": 1.8843276249972405,
+      "mean_output_tokens": 50.72727272727273
+    }
+  },
+  "peak_mem_gb": 4.22782254,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 73901662,
+  "meta": {
+    "name": "dpo-stress",
+    "variant": "finetuned",
+    "command": "python -m finsight_llm.evaluate --variant finetuned --adapter artifacts/adapters_dpo --test data/stress.jsonl --name dpo-stress --out results/dpo/raw/dpo-stress.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": "artifacts/adapters_dpo",
+    "decoding": "greedy (temperature 0)",
+    "n_test": 234,
+    "machine": "macOS-27.2.1-arm64-arm-64bit",
+    "started": "2026-11-13T12:21:38+0800"
+  }
+}
