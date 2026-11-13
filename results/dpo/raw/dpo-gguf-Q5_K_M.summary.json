@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.45271694612022517,
+  "fact_coverage": 0.8672086720867208,
+  "decode_tok_per_s": 71.54002024086248,
+  "mean_latency_s": 0.8758529334267134,
+  "p95_latency_s": 1.1988749590018415,
+  "mean_output_tokens": 62.65853658536585,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.5054276991292771,
+      "fact_coverage": 0.803921568627451,
+      "decode_tok_per_s": 70.9221942749112,
+      "mean_latency_s": 0.667398038332798,
+      "p95_latency_s": 0.8413964999999735,
+      "mean_output_tokens": 47.333333333333336
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4833352560233837,
+      "fact_coverage": 0.9572649572649573,
+      "decode_tok_per_s": 72.0393395690012,
+      "mean_latency_s": 1.0753858368715687,
+      "p95_latency_s": 1.202927999998792,
+      "mean_output_tokens": 77.47008547008546
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.37232475814418425,
+      "fact_coverage": 0.7735042735042735,
+      "decode_tok_per_s": 70.78833834451837,
+      "mean_latency_s": 0.7128510096669906,
+      "p95_latency_s": 0.7616897500047344,
+      "mean_output_tokens": 50.46153846153846
+    }
+  },
+  "peak_mem_gb": null,
+  "model_size_bytes": 1125050144,
+  "adapter_size_bytes": 0,
+  "meta": {
+    "name": "dpo-gguf-Q5_K_M",
+    "variant": "gguf",
+    "command": "python -m finsight_llm.evaluate --variant gguf --gguf artifacts/gguf-dpo/finsight-insight-dpo-qwen2.5-1.5b-Q5_K_M.gguf --name dpo-gguf-Q5_K_M --out results/dpo/raw/dpo-gguf-Q5_K_M.jsonl",
+    "model": "artifacts/gguf-dpo/finsight-insight-dpo-qwen2.5-1.5b-Q5_K_M.gguf",
+    "adapter": null,
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2.1-arm64-arm-64bit",
+    "started": "2026-11-13T12:39:28+0800"
+  }
+}

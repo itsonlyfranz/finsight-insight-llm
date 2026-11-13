@@ -1,0 +1,68 @@
+{
+  "n": 246,
+  "number_fidelity_pct": 100.0,
+  "format_valid_pct": 100.0,
+  "accepted_pct": 100.0,
+  "clean_pass_pct": 100.0,
+  "rouge_l": 0.4575421854157333,
+  "fact_coverage": 0.8468834688346883,
+  "decode_tok_per_s": 30.143303937868307,
+  "mean_latency_s": 2.033106688365974,
+  "p95_latency_s": 2.818125541001791,
+  "mean_output_tokens": 61.28455284552845,
+  "by_task": {
+    "goal": {
+      "n": 51,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4947160420858013,
+      "fact_coverage": 0.7058823529411765,
+      "decode_tok_per_s": 29.203952013131506,
+      "mean_latency_s": 1.4811317982352121,
+      "p95_latency_s": 1.915831291997165,
+      "mean_output_tokens": 43.254901960784316
+    },
+    "insight": {
+      "n": 117,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.4985471934398343,
+      "fact_coverage": 0.9572649572649573,
+      "decode_tok_per_s": 30.650586657390658,
+      "mean_latency_s": 2.4932248205558194,
+      "p95_latency_s": 2.838631834005355,
+      "mean_output_tokens": 76.41880341880342
+    },
+    "simulation": {
+      "n": 78,
+      "number_fidelity_pct": 100.0,
+      "format_valid_pct": 100.0,
+      "accepted_pct": 100.0,
+      "clean_pass_pct": 100.0,
+      "rouge_l": 0.37172869017222976,
+      "fact_coverage": 0.7735042735042735,
+      "decode_tok_per_s": 29.56375523607626,
+      "mean_latency_s": 1.7038361490128573,
+      "p95_latency_s": 1.7770186249981634,
+      "mean_output_tokens": 50.37179487179487
+    }
+  },
+  "peak_mem_gb": 3.89335084,
+  "model_size_bytes": 3098969284,
+  "adapter_size_bytes": 73901662,
+  "meta": {
+    "name": "dpo",
+    "variant": "finetuned",
+    "command": "python -m finsight_llm.evaluate --variant finetuned --adapter artifacts/adapters_dpo --name dpo --out results/dpo/raw/dpo.jsonl",
+    "model": "models/Qwen2.5-1.5B-Instruct",
+    "adapter": "artifacts/adapters_dpo",
+    "decoding": "greedy (temperature 0)",
+    "n_test": 246,
+    "machine": "macOS-27.2.1-arm64-arm-64bit",
+    "started": "2026-11-13T12:13:14+0800"
+  }
+}

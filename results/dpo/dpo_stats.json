@@ -1,0 +1,77 @@
+{
+  "beta": 0.1,
+  "lr": 1e-05,
+  "iters": 900,
+  "batch_pairs": 2,
+  "diverged": false,
+  "train_pairs": 1800,
+  "valid_pairs": 469,
+  "trainable_params": 18464768,
+  "seconds": 6324.19685792923,
+  "peak_memory_gb": 11.225653474,
+  "valid_history": [
+    {
+      "iter": 0,
+      "valid_loss": 0.6931471824645996,
+      "valid_reward_acc": 0.0,
+      "valid_margin": 0.0
+    },
+    {
+      "iter": 100,
+      "valid_loss": 0.6908032056619363,
+      "valid_reward_acc": 0.4946695095948827,
+      "valid_margin": 0.0733508699607893
+    },
+    {
+      "iter": 200,
+      "valid_loss": 0.6686008895383969,
+      "valid_reward_acc": 0.582089552238806,
+      "valid_margin": 0.6233177301245397
+    },
+    {
+      "iter": 300,
+      "valid_loss": 0.6493160217555601,
+      "valid_reward_acc": 0.5884861407249466,
+      "valid_margin": 1.3152048922574415
+    },
+    {
+      "iter": 400,
+      "valid_loss": 0.6249162885171773,
+      "valid_reward_acc": 0.6268656716417911,
+      "valid_margin": 2.4338203456584435
+    },
+    {
+      "iter": 500,
+      "valid_loss": 0.6379076724113432,
+      "valid_reward_acc": 0.6012793176972282,
+      "valid_margin": 2.534100962850426
+    },
+    {
+      "iter": 600,
+      "valid_loss": 0.6533317170671816,
+      "valid_reward_acc": 0.5778251599147122,
+      "valid_margin": 2.322110944171883
+    },
+    {
+      "iter": 700,
+      "valid_loss": 0.6682729474517074,
+      "valid_reward_acc": 0.5714285714285714,
+      "valid_margin": 2.170633628682384
+    },
+    {
+      "iter": 800,
+      "valid_loss": 0.6796654653447524,
+      "valid_reward_acc": 0.5628997867803838,
+      "valid_margin": 1.9978604913631608
+    },
+    {
+      "iter": 900,
+      "valid_loss": 0.6859080597027533,
+      "valid_reward_acc": 0.5565031982942431,
+      "valid_margin": 1.8620063572653385
+    }
+  ],
+  "sft_alpha": 0.0,
+  "grad_checkpoint": true,
+  "grad_clip": 1.0
+}

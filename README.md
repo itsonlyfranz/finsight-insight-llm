@@ -46,6 +46,79 @@ Per-task tables (number fidelity, format validity, ROUGE-L) are in [`results/RES
 - **The test set comes from the same synthetic generator as the training data.** It shows that the model learned the task and the format, not that it generalizes to real user data or to facts the generator cannot produce.
 - Speeds are for this machine, with one request at a time.
 
+## Preference tuning (DPO) on top of the SFT model
+
+Question: does preference tuning add anything on top of the SFT adapter? Method: build preference pairs from the training facts only, run DPO on the SFT LoRA weights, and compare SFT vs SFT+DPO on the same 246-row held-out test set plus a stress set of adversarial facts. **Result: it did not help.** Number fidelity and format validity were already 100% for SFT, so there was no headroom; ROUGE-L is unchanged within noise and fact coverage got slightly worse.
+
+### Preference data (fully synthetic)
+
+Built by `src/finsight_llm/preferences.py` from `data/train.jsonl` (the test split is never read). `chosen` is the reference insight. `rejected` is one of:
+
+| Rejected type | How it is made | What catches it |
+|---|---|---|
+| `changed_figure` | one money figure replaced by a near-duplicate (digit transposition, +/-10%, etc.) that is not in the facts | number guard |
+| `invented_figure` | an extra clause with a plausible but ungiven figure (annualised, scaled) | number guard |
+| `broken_format` | missing `ACTION:` line, markdown, preamble, extra line, too many/few sentences, goal over 30 words | format checker |
+| `vague_text` / `off_topic_text` | in-format but generic or off-topic text with unsupported claims | fact coverage |
+| `misattributed_figure` | a figure swapped for a different figure from the facts (grounded but wrong) | fact coverage |
+| `sft_sample` | worst of 4 samples of the SFT model (temperature 1.0, top-p 0.95) that loses to the reference: fails the guard/format, covers fewer reference figures, or has ROUGE-L < 0.8 | existing metrics |
+
+Every synthetic rejection is re-scored and kept only if it really fails (`is_failure`); up to two distinct synthetic types per prompt. Counts (`data/preferences/stats.json`): 4,217 train pairs and 469 valid pairs (1,456 / 162 prompts, split by prompt id, 10% valid), of which 2,775 + 309 synthetic and 1,442 + 160 sampled. Sampled negatives are mostly paraphrases: of the 1,602, none fails the guard or the format checker (SFT is already clean), 593 state fewer of the reference's figures, and the rest are only less close to the reference text. Mined samples are in `data/preferences/sft_samples.jsonl`.
+
+### Training
+
+mlx-lm 0.32 has no DPO trainer, so `src/finsight_llm/dpo.py` implements the DPO loss in MLX: the policy is base + the SFT adapter (only the 18.5M LoRA parameters train), the reference is the same model before any update (its sequence log-probs are computed once, so no second model copy). Dropout is off, so the step-0 loss is exactly ln 2 (logged as a check).
+
+| | |
+|---|---|
+| beta / lr / schedule | 0.1 / 1e-5 / 30-step warmup, cosine to 1e-6, AdamW, grad-clip 1.0 |
+| Steps | 900 steps x 2 pairs (1,800 train pairs, a seeded subset of the 4,217), gradient checkpointing |
+| Validation loss (469 pairs) | 0.693 (0) -> 0.691 (100) -> 0.669 (200) -> 0.649 (300) -> **0.625 (400)** -> 0.638 -> 0.653 -> 0.668 -> 0.680 -> 0.686 (900) |
+| Validation pair accuracy | 0.495 at 100, 0.627 at 400, 0.557 at 900 |
+| Time | 6,324 s optimisation + 1,337 s for the reference log-probs; 7,989 s wall-clock |
+| Peak memory | 11.2 GB MLX peak; 28.3 GB process peak footprint (`/usr/bin/time -l`, includes cached buffers) |
+| Adapter | 74 MB (same shape as the SFT adapter) |
+
+Validation loss is lowest at step 400 and rises afterwards (the policy overfits the 1,800-pair subset). **The step-400 checkpoint is the one evaluated below**, chosen by validation loss on held-out *train-split* pairs before looking at any test number; the final step-900 adapter scores the same on the test set (ROUGE-L 0.459, fact coverage 0.847, `results/dpo/raw/dpo-it900.jsonl`). Logs: [`results/dpo/train.log`](results/dpo/train.log), stats: [`results/dpo/dpo_stats.json`](results/dpo/dpo_stats.json).
+
+What went wrong on the way: a first run (batch 4 pairs, lr 5e-6, no checkpointing) did not diverge but was slow (11-13 s/step, 24.7 GB peak) and died at about step 260 with the OS GPU watchdog error ([`results/dpo/train_attempt1_batch4_crashed.log`](results/dpo/train_attempt1_batch4_crashed.log)). It had also learned slowly, so I restarted with batch 2, gradient checkpointing and lr 1e-5 (a choice made after seeing that run).
+
+### Results (SFT vs SFT+DPO, greedy, same scoring code)
+
+Test split, n = 246. Intervals are 2,000-resample paired bootstraps.
+
+| | SFT | SFT + DPO | Delta | 95% CI |
+|---|---|---|---|---|
+| Number fidelity | 100.0% | 100.0% | 0 | |
+| Format valid | 100.0% | 100.0% | 0 | |
+| ROUGE-L | 0.454 | 0.458 | +0.003 | [-0.028, +0.037] |
+| Fact coverage | 0.881 | 0.847 | -0.035 | [-0.058, -0.011] |
+
+Stress set, n = 234 (`data/stress.jsonl`, `src/finsight_llm/stress.py`): ordinary facts plus 8 near-duplicate decoy figures per prompt (transposed digits, off-by-a-little amounts), none in the reference. A decoy in the output passes the guard but is the wrong number.
+
+| | SFT | SFT + DPO | Delta | 95% CI |
+|---|---|---|---|---|
+| Number fidelity | 100.0% | 100.0% | 0 | |
+| Format valid | 100.0% | 100.0% | 0 | |
+| ROUGE-L | 0.464 | 0.435 | -0.029 | [-0.064, +0.006] |
+| Fact coverage | 0.842 | 0.788 | -0.054 | [-0.083, -0.024] |
+| Decoy rate (lower is better) | 0.9% | 1.7% | +0.9 pp | |
+
+The drop is concentrated in simulations (fact coverage 0.919 -> 0.774 on test, 0.957 -> 0.760 on stress), where the tuned model more often leaves out one of the projected figures; goals improved slightly (0.650 -> 0.706 test). SFT was not weak on the stress set: it held 100% fidelity and 100% format, and copied a decoy on only 0.9% of prompts. Per-task tables: [`results/dpo/RESULTS.md`](results/dpo/RESULTS.md).
+
+GGUF `Q5_K_M` of the DPO model (same export and `llama-server` benchmark as above, test split):
+
+| Model | Number fidelity | Format valid | ROUGE-L | Fact coverage | Decode tok/s | Mean latency | Size |
+|---|---|---|---|---|---|---|---|
+| SFT, Q5_K_M | 100.0% | 100.0% | 0.456 | 0.894 | 70.9 | 0.92 s | 1,125 MB |
+| SFT + DPO, Q5_K_M | 100.0% | 100.0% | 0.453 | 0.867 | 71.5 | 0.88 s | 1,125 MB |
+
+**Verdict:** on this task DPO is a null-to-slightly-negative result: SFT already saturates the guard and format checks, the sampled negatives are mostly paraphrases, and the tuned model trades a little fact coverage for nothing measurable, so the SFT model remains the one to ship.
+
+Caveats: one seed, one run; pairs come from the same templated generator as the data; the DPO optimiser saw 1,800 of the 4,217 pairs; the SFT test row is the committed run from the table above (greedy decoding, so deterministic) and speeds are from different sessions; the stress set is adversarial by construction, not real traffic.
+
+Reproduce: `scripts/dpo.sh pairs|train|eval|export` (or `all`); `ITERS`, `LR`, `BETA` env vars set the hyperparameters; `LLAMA_CPP_SRC` is needed for `export`. Adapters and GGUF files are git-ignored.
+
 ## Architecture
 
 ```mermaid
@@ -123,10 +196,11 @@ src/finsight_llm/   engine.py (ported engines) · guard.py (number guard, cleane
                     dataset.py · templates.py · metrics.py · backends.py · evaluate.py · report.py
                     money.py · rescore.py
 tests/              generator determinism, grounding, splits, engine arithmetic, guard behaviour
-data/               train / valid / test .jsonl, stats.json
+data/               train / valid / test .jsonl, stats.json; preferences/ (DPO pairs), stress.jsonl
 configs/lora.yaml   training hyperparameters
-scripts/            train.sh · export.sh · eval.sh
-results/            RESULTS.md, results.json, train.log, raw/*.jsonl
+scripts/            train.sh · export.sh · eval.sh · dpo.sh
+                    preferences.py · sample_sft.py · dpo.py · stress.py · dpo_report.py (preference tuning)
+results/            RESULTS.md, results.json, train.log, raw/*.jsonl; dpo/ (preference-tuning results)
 MODEL_CARD.md       draft model card        DATASET_CARD.md   draft dataset card
 ```
 
